@@ -10,7 +10,6 @@ import logging
 # -----------------------------
 # SlowAPI: Rate Limiting Setup
 # -----------------------------
-from slowapi.util import get_remote_address
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.errors import RateLimitExceeded
 from slowapi import _rate_limit_exceeded_handler
@@ -19,7 +18,6 @@ from slowapi import _rate_limit_exceeded_handler
 # Starlette Middleware for custom payload control
 # -----------------------------
 from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.requests import Request
 
 # -----------------------------
 # Internal Imports (App-specific)
@@ -27,7 +25,7 @@ from starlette.requests import Request
 from app.database import engine
 from app import models
 from app.user import router as user_router
-from app.device import router as device_router
+from app.resource import router as resource_router
 from app.admin import router as admin_router
 from app.utils import log_event
 from app.limiter_config import limiter
@@ -107,10 +105,10 @@ app.add_middleware(SlowAPIMiddleware)
 app.add_middleware(PayloadLimitMiddleware)
 
 # -----------------------------
-# Register API Routers
+# Register application Routers
 # -----------------------------
 app.include_router(user_router)
-app.include_router(device_router)
+app.include_router(resource_router)
 app.include_router(admin_router)
 
 # -----------------------------
@@ -138,4 +136,4 @@ async def route_based_on_user_agent(request: Request, call_next):
 # -----------------------------
 def run():
     import uvicorn
-    uvicorn.run("API_Server.app.main:app", host="0.0.0.0", port=8000, reload=True)  # Hot-reload enabled for dev
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)  # Hot-reload enabled for dev
