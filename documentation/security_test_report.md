@@ -170,7 +170,7 @@ The following automated scripts were used during security testing:
 - `authorization_test.py` – authentication and token validation tests
 - `resource_identity_test.py` – duplicate resource and ownership validation tests
 - `password_policy_test.py` – password policy and change validation
-- `admin_password_change_test.py` – administrative password management validation
+- `manager_password_change_test.py` – administrative password management validation
 - `isvs_security_tests.py` – combined security test execution script
 
 ---
