@@ -12,7 +12,7 @@ This document summarizes the security testing performed on the IoT Resource Mana
 
 The testing approach was based on the **OWASP IoT Security Verification Standard (ISVS)**, specifically **Section 2.1 – User Space Application Requirements**.
 
-The API backend provides functionality for user management, resource registration, and administrative control within an IoT ecosystem. Security testing was conducted to ensure that authentication mechanisms, authorization controls, password policies, and resource identity validation mechanisms were correctly implemented.
+The API backend provides functionality for user management, resource registration, and administrative control within an IoT-based system. Security testing was conducted to ensure that authentication mechanisms, authorization controls, password policies, and resource identity validation mechanisms were correctly implemented.
 
 ---
 
@@ -35,7 +35,7 @@ Backend Framework: FastAPI
 Programming Language: Python  
 Database: PostgreSQL  
 Authentication Mechanism: JWT-based authentication  
-Testing Environment: Local development environment  
+Testing Environment: Local development environment using containerized FastAPI backend and PostgreSQL database  
 
 ---
 
@@ -168,7 +168,7 @@ Rate limiting controls functioned as expected and prevented excessive authentica
 The following automated scripts were used during security testing:
 
 - `authorization_test.py` – authentication and token validation tests
-- `device_identity_test.py` – duplicate resource and ownership validation tests
+- `resource_identity_test.py` – duplicate resource and ownership validation tests
 - `password_policy_test.py` – password policy and change validation
 - `admin_password_change_test.py` – administrative password management validation
 - `isvs_security_tests.py` – combined security test execution script
@@ -191,16 +191,10 @@ Some security tests were grouped together within shared scripts due to project t
 
 ---
 
-## Limitations
-
-Requirement **2.1.11** from the OWASP ISVS standard was not implemented during this project due to development timeline constraints during the internship.
-
----
-
 ## Conclusion
 
-The IoT Resource Management API backend successfully demonstrated compliance with multiple security controls defined in the OWASP IoT Security Verification Standard (ISVS).
+The IoT Resource Management API backend demonstrates implementation of multiple security controls aligned with the OWASP IoT Security Verification Standard (ISVS).
 
 The testing confirmed that the system enforces strong authentication mechanisms, prevents unauthorized access, validates resource ownership, and mitigates brute-force attacks through rate limiting controls.
 
-Overall, the backend API demonstrated strong security practices suitable for IoT resource management environments.
+Overall, the backend API demonstrates strong security practices aligned with modern IoT backend security requirements.
