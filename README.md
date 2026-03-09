@@ -212,6 +212,32 @@ Once the server starts, access the interactive API documentation (Swagger UI) av
 
 ---
 
+## Environment Variables
+
+This project requires several environment variables.
+
+Create a `.env` file in the project root based on the provided `.env.example` file.
+
+Example:
+
+```bash
+cp .env.example .env
+```
+
+Then update the values inside `.env` according to your environment.
+
+Required variables include:
+
+- `SECRET_KEY` – JWT signing key
+- `MANAGER_SECRET_KEY` – manager JWT key
+- `TWILIO_ACCOUNT_SID` – Twilio account SID
+- `TWILIO_AUTH_TOKEN` – Twilio authentication token
+- `TWILIO_WHATSAPP_FROM` – Twilio WhatsApp sender
+- `TWILIO_TEMPLATE_SID` – WhatsApp template ID
+- `ROCKYOU_PATH` – path to the rockyou password list
+
+---
+
 ## Key Learning Outcomes
 
 This project demonstrates practical experience with:
