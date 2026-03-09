@@ -8,13 +8,13 @@
 
 FastAPI based backend API with automated security testing aligned with the **OWASP IoT Security Verification Standard (ISVS)**.
 
-This project demonstrates authentication validation, authorization enforcement, password policy testing, brute-force attack simulation, and rate limiting verification for IoT device management APIs.
+This project demonstrates authentication validation, authorization enforcement, password policy testing, brute-force attack simulation, and rate limiting verification for IoT resource management APIs.
 
 ## Overview
 
-This repository demonstrates the development and security testing of a backend API designed for managing users and IoT devices. The backend is built using **FastAPI** and **PostgreSQL**, and security testing was conducted based on the **OWASP IoT Security Verification Standard (ISVS)**.
+This repository demonstrates the development and security testing of a backend API designed for managing users and IoT resources. The backend is built using **FastAPI** and **PostgreSQL**, and security testing was conducted based on the **OWASP IoT Security Verification Standard (ISVS)**.
 
-The project focuses on validating authentication mechanisms, authorization controls, password management policies, and device identity management within an IoT ecosystem.
+The project focuses on validating authentication mechanisms, authorization controls, password management policies, and resource identity management within an IoT ecosystem.
 
 This repository contains:
 
@@ -40,7 +40,7 @@ This repository contains:
 
 Security testing was conducted using automated Python scripts that simulate real-world attack scenarios against the API endpoints.  
 
-Tests were executed to validate authentication flows, access control mechanisms, password policies, and device identity enforcement in accordance with OWASP ISVS guidelines.
+Tests were executed to validate authentication flows, access control mechanisms, password policies, and resource identity enforcement in accordance with OWASP ISVS guidelines.
 
 ## Project Structure
 
@@ -51,7 +51,7 @@ iot-api-security-testing-isvs
 │   ├── app
 │   │   ├── admin.py
 │   │   ├── database.py
-│   │   ├── device.py
+│   │   ├── resource.py
 │   │   ├── limiter_config.py
 │   │   ├── main.py
 │   │   ├── models.py
@@ -79,24 +79,24 @@ iot-api-security-testing-isvs
 
 ## Backend API
 
-The backend provides core functionality required for managing users and IoT devices.
+The backend provides core functionality required for managing users and IoT resources.
 
 ### Core Features
 
 - User registration and authentication
 - JWT-based authentication tokens
-- Device registration and management
-- Administrative device control
+- Resource registration and management
+- Administrative resource control
 - Password management
-- Device ownership traceability
+- Resource ownership traceability
 
 ### API Routers
 
 | Router | Description |
 |------|-------------|
 | `/user` | User authentication and password management |
-| `/device` | Device registration and ownership validation |
-| `/admin` | Administrative device and user management |
+| `/resource` | Resource registration and ownership validation |
+| `/admin` | Administrative resource and user management |
 
 FastAPI automatically generates interactive API documentation (Swagger UI) available at:
 
@@ -113,7 +113,7 @@ The testing covered:
 - Authentication validation
 - Authorization enforcement
 - Password policy enforcement
-- Device identity validation
+- Resource identity validation
 - Brute-force attack simulation
 - Rate limiting validation
 
@@ -132,7 +132,7 @@ Testing focused on **Section 2.1 – User Space Application Requirements**.
 | ISVS Control | Description |
 |--------------|-------------|
 | 2.1.1 | Unique user identification |
-| 2.1.2 | Unique device identification |
+| 2.1.2 | Unique resource identification |
 | 2.1.3 | Strong authentication enforcement |
 | 2.1.4 | Authentication framework validation |
 | 2.1.5 | Password security validation |
@@ -140,7 +140,7 @@ Testing focused on **Section 2.1 – User Space Application Requirements**.
 | 2.1.7 | Password reuse prevention |
 | 2.1.8 | Administrative password validation |
 | 2.1.9 | Brute-force attack protection |
-| 2.1.10 | Device identity integrity |
+| 2.1.10 | Resource identity integrity |
 
 Control **2.1.11** was not implemented due to project timeline constraints during development.
 
@@ -178,10 +178,10 @@ The report includes:
 - Unauthorized resource access attempts
 - Cross-user data access validation
 
-### Device Identity Validation
+### Resource Identity Validation
 
-- Duplicate device registration tests
-- Device ownership validation
+- Duplicate resource registration tests
+- Resource ownership validation
 
 ### Brute Force Simulation
 

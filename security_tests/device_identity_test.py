@@ -2,7 +2,7 @@ import requests
 
 BASE_URL = "http://127.0.0.1:8000"
 LOGIN_URL = f"{BASE_URL}/user/login"
-DEVICE_DETAILS_URL = f"{BASE_URL}/device/device-details"
+DEVICE_DETAILS_URL = f"{BASE_URL}/resource/resource-details"
 CRED_FILE = "cred.txt"
 
 def read_cred(file_path):
@@ -31,9 +31,9 @@ def get_device_ids(token):
             data  = resp.json()
             return [d["device_id"] for d in data if "device_id" in d]
         else:
-            print(f"Failed to get device details: {resp.status_code} - {resp.text}")
+            print(f"Failed to get resource details: {resp.status_code} - {resp.text}")
     except Exception as e:
-        print(f"Failed to fetch device details: {e}")
+        print(f"Failed to fetch resource details: {e}")
     return []
 
 def check_global_device_id_uniqueness():
@@ -52,7 +52,7 @@ def check_global_device_id_uniqueness():
             print(f"Logged in as {cred['username']}")
 
         device_ids = get_device_ids(token)
-        print(f"[{cred['username']}] Device IDs: {device_ids}")
+        print(f"[{cred['username']}] Resource IDs: {device_ids}")
 
         for device_id in device_ids:
             if device_id in all_ids:
@@ -61,11 +61,11 @@ def check_global_device_id_uniqueness():
                 all_ids[device_id] = cred['username']
 
     if duplicates:
-        print("\n Duplicate device IDs found across users:")
+        print("\n Duplicate resource IDs found across users:")
         for device_id, user_a, user_b in duplicates:
-            print(f" - Device ID '{device_id}' used by both {user_a} and {user_b}")
+            print(f" - Resource ID '{device_id}' used by both {user_a} and {user_b}")
     else:
-        print("\n All device IDs are globally unique")
+        print("\n All resource IDs are globally unique")
 
 if __name__ == "__main__":
     check_global_device_id_uniqueness()

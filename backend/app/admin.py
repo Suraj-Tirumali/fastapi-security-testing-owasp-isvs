@@ -7,7 +7,7 @@ import os
 # Import internal models, schemas, database utilities, and helper functions
 from app import models, schemas
 from app.limiter_config import limiter
-from app.models import Device
+from app.models import Resource
 from app.database import get_db
 from app.utils import(
     is_password_leaked, hash_passwd, verify_admin_token, verify_passwd,
@@ -136,37 +136,37 @@ def list_all_users(request: Request, db: Session = Depends(get_db), skip: int = 
     }
 
 # -------------------------------
-# LIST DEVICES
+# LIST RESOURCES
 # -------------------------------
-# Get grouped list of devices (active/inactive) by category and user
-@router.get("/devices", response_model=schemas.GroupedDeviceSummary, dependencies=[Depends(verify_admin_token)])
+# Get grouped list of resources (active/inactive) by category and user
+@router.get("/resources", response_model=schemas.GroupedDeviceSummary, dependencies=[Depends(verify_admin_token)])
 def list_all_devices(request: Request, db: Session = Depends(get_db), skip: int = Query(0, ge=0), limit: int = Query(10, le=100)):
-    devices = db.query(models.Device).join(models.User, models.Device.user_uid == models.User.user_uid).offset(skip).limit(limit).all()
+    resources = db.query(models.Resource).join(models.User, models.Resource.user_uid == models.User.user_uid).offset(skip).limit(limit).all()
 
     active_devices = {}
     inactive_devices = {}
 
-    # Group devices by category and user
-    for device in devices:
-        category = device.category.lower()
-        username = device.username.lower()
-        status = device.status.lower()
+    # Group resources by category and user
+    for resource in resources:
+        category = resource.category.lower()
+        username = resource.username.lower()
+        status = resource.status.lower()
 
         result = active_devices if status == "active" else inactive_devices
 
         if category not in result:
             result[category] = {
                 "category": category,
-                "devices": {},
+                "resources": {},
                 "device_count": 0
             }
-        if username not in result[category]["devices"]:
-            result[category]["devices"][username] = 0
-        result[category]["devices"][username] += 1
+        if username not in result[category]["resources"]:
+            result[category]["resources"][username] = 0
+        result[category]["resources"][username] += 1
         result[category]["device_count"] += 1
 
     # Log operation
-    log_event("info", "DEVICE LIST", "Admin listed all devices", request)
+    log_event("info", "RESOURCE LIST", "Admin listed all resources", request)
 
     return schemas.GroupedDeviceSummary(
         active_devices=[schemas.GroupedUserDevice(**val) for val in active_devices.values()],
@@ -174,23 +174,23 @@ def list_all_devices(request: Request, db: Session = Depends(get_db), skip: int 
     )
 
 # -------------------------------
-# LIST USERS WITH DEVICES
+# LIST USERS WITH RESOURCES
 # -------------------------------
-# Show all users with their devices
-@router.get("/list-users-with-devices", response_model=list[schemas.UserWithDevicesOut], dependencies=[Depends(verify_admin_token)])
+# Show all users with their resources
+@router.get("/list-users-with-resources", response_model=list[schemas.UserWithDevicesOut], dependencies=[Depends(verify_admin_token)])
 def list_users_with_devices(request: Request, db: Session = Depends(get_db), skip: int = Query(0, ge=0), limit: int = Query(10, le=100)):
     users = db.query(models.User).offset(skip).limit(limit).all()
     result = []
 
-    # Fetch and map devices per user
+    # Fetch and map resources per user
     for user in users:
-        devices = db.query(models.Device).filter(models.Device.user_uid == user.user_uid).all()
+        resources = db.query(models.Resource).filter(models.Resource.user_uid == user.user_uid).all()
         device_list = [
             schemas.DeviceSummary(
                 device_id=d.device_id,
                 category=d.category,
                 status=d.status
-            ) for d in devices
+            ) for d in resources
         ]
 
         result.append(
@@ -199,12 +199,12 @@ def list_users_with_devices(request: Request, db: Session = Depends(get_db), ski
                 username=user.username,
                 email=user.email,
                 phone=user.phone_number,
-                devices=device_list
+                resources=device_list
             )
         )
     
     # Log the list action
-    log_event("info", "USER DEVICE LIST", "Admin fetched all users with devices", request)
+    log_event("info", "USER RESOURCE LIST", "Admin fetched all users with resources", request)
     return result
 
 # -------------------------------
@@ -249,16 +249,16 @@ def admin_change_password(request: Request, data: schemas.AdminPasswordChange, d
     return {"message": f"Password for user with {email} updated"}
 
 # -------------------------------
-# REGISTER DEVICE FOR USER
+# REGISTER RESOURCE FOR USER
 # -------------------------------
-# Admin registers a device on behalf of a user
-@router.post("/register-device-for-user", dependencies=[Depends(verify_admin_token)])
-def register_device_for_user(request: Request, device: schemas.DeviceCreate, db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.email == device.email).first()
+# Admin registers a resource on behalf of a user
+@router.post("/register-resource-for-user", dependencies=[Depends(verify_admin_token)])
+def register_device_for_user(request: Request, resource: schemas.DeviceCreate, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.email == resource.email).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
-    category = device.category.lower()
+    category = resource.category.lower()
     prefix = get_category_prefix_from_db(category, db)
     device_id = generate_device_id(prefix, user.user_uid)
 
@@ -266,8 +266,8 @@ def register_device_for_user(request: Request, device: schemas.DeviceCreate, db:
     raw_password = user.user_uid + device_id
     hashed_password = hash_passwd(raw_password)
 
-    # Add device to user
-    new_device = models.Device(
+    # Add resource to user
+    new_device = models.Resource(
         device_id=device_id,
         category=category,
         user_uid=user.user_uid,
@@ -276,7 +276,7 @@ def register_device_for_user(request: Request, device: schemas.DeviceCreate, db:
         device_password=hashed_password 
     )
     db.add(new_device)
-    user.device_registered_by = f"Device {device_id} registered by admin"
+    user.device_registered_by = f"Resource {device_id} registered by admin"
     db.commit()
     db.refresh(new_device)
 
@@ -289,13 +289,13 @@ def register_device_for_user(request: Request, device: schemas.DeviceCreate, db:
     )
 
     # Log registration
-    log_event("info", "DEVICE REGISTERED", f"Device {device_id} registered by admin for {user.email}", request)
-    return {"message": f"Device registered with ID: {device_id}"}
+    log_event("info", "RESOURCE REGISTERED", f"Resource {device_id} registered by admin for {user.email}", request)
+    return {"message": f"Resource registered with ID: {device_id}"}
 
 # -------------------------------
 # CATEGORY MANAGEMENT
 # -------------------------------
-# Add new device category
+# Add new resource category
 @router.post("/add-category", response_model=schemas.CategoryOut, dependencies=[Depends(verify_admin_token)])
 def add_device_category(request: Request, data: schemas.CategoryCreate, db : Session = Depends(get_db)):
     cleaned_name = data.name.replace(" ", "").lower()
@@ -326,41 +326,41 @@ def list_categories(request: Request, db: Session = Depends(get_db)):
     return db.query(models.Category).all()
 
 # -------------------------------
-# DEREGISTER DEVICE
+# DEREGISTER RESOURCE
 # -------------------------------
-# Admin deactivates a device
-@router.post("/deregister-device/{device_id}", dependencies=[Depends(verify_admin_token)])
+# Admin deactivates a resource
+@router.post("/deregister-resource/{device_id}", dependencies=[Depends(verify_admin_token)])
 def deregister_device_admin(request: Request, device_id: str, db: Session = Depends(get_db)):
-    device = db.query(models.Device).filter_by(device_id=device_id).first()
-    if not device:
-        raise HTTPException(status_code=404, detail="Device not found")
+    resource = db.query(models.Resource).filter_by(device_id=device_id).first()
+    if not resource:
+        raise HTTPException(status_code=404, detail="Resource not found")
 
-    device.status = "inactive"
+    resource.status = "inactive"
 
     # Update user log if available
-    user = db.query(models.User).filter(models.User.user_uid == device.user_uid).first()
+    user = db.query(models.User).filter(models.User.user_uid == resource.user_uid).first()
     if user:
-        user.device_deregistered_by = f"Device {device.device_id} marked inactive by admin"
+        user.device_deregistered_by = f"Resource {resource.device_id} marked inactive by admin"
         db.add(user)
 
     db.commit()
-    mark_device_as_unclaimed(db, device.device_id)
+    mark_device_as_unclaimed(db, resource.device_id)
     # log de-registeration
-    log_event("info", "DEVICE DEREGISTERED", f"Device {device_id} marked inactive by admin", request)
-    return {"message": f"Device {device_id} marked as inactive"}
+    log_event("info", "RESOURCE DEREGISTERED", f"Resource {device_id} marked inactive by admin", request)
+    return {"message": f"Resource {device_id} marked as inactive"}
 
 # -------------------------------
-# LIST INACTIVE DEVICES
+# LIST INACTIVE RESOURCES
 # -------------------------------
-# Return list of all inactive devices
-@router.get("/list-inactive-devices", response_model=list[schemas.InactiveDeviceOut], dependencies=[Depends(verify_admin_token)])
+# Return list of all inactive resources
+@router.get("/list-inactive-resources", response_model=list[schemas.InactiveDeviceOut], dependencies=[Depends(verify_admin_token)])
 def list_inactive_devices(request: Request, db: Session = Depends(get_db), skip: int = Query(0, ge=0), limit: int = Query(10, le=100)):
-    devices = db.query(models.Device).filter(models.Device.status == "inactive").offset(skip).limit(limit).all()
+    resources = db.query(models.Resource).filter(models.Resource.status == "inactive").offset(skip).limit(limit).all()
 
-    if not devices:
-        raise HTTPException(status_code=404, detail="No inactive devices found")
-    #log inactive devices
-    log_event("info", "DEVICE LIST", "Admin listed inactive devices", request)
+    if not resources:
+        raise HTTPException(status_code=404, detail="No inactive resources found")
+    #log inactive resources
+    log_event("info", "RESOURCE LIST", "Admin listed inactive resources", request)
     return [
         schemas.InactiveDeviceOut(
             device_id=d.device_id,
@@ -369,18 +369,18 @@ def list_inactive_devices(request: Request, db: Session = Depends(get_db), skip:
             user_uid=d.user_uid,
             status=d.status
         )
-        for d in devices
+        for d in resources
     ]
 
 # -------------------------------
-# DEVICE OWNERSHIP LOGGING
+# RESOURCE OWNERSHIP LOGGING
 # -------------------------------
-# View all device ownership history
-@router.get("/device-ownerships", response_model=List[schemas.DeviceOwnershipOut], dependencies=[Depends(verify_admin_token)])
+# View all resource ownership history
+@router.get("/resource-ownerships", response_model=List[schemas.DeviceOwnershipOut], dependencies=[Depends(verify_admin_token)])
 def list_device_ownerships(request: Request, db: Session = Depends(get_db), skip: int = Query(0, ge=0), limit: int = Query(10, le=100)):
     records = db.query(models.DeviceOwnership).offset(skip).limit(limit).all()
     # log ownership list
-    log_event("info", "OWNERSHIP LIST", "Admin fetched device ownerships", request)
+    log_event("info", "OWNERSHIP LIST", "Admin fetched resource ownerships", request)
     return [
         schemas.DeviceOwnershipOut(
             device_id=r.device_id,
@@ -393,7 +393,7 @@ def list_device_ownerships(request: Request, db: Session = Depends(get_db), skip
 # -------------------------------
 # USER DEACTIVATION
 # -------------------------------
-# Admin disables a user and all their devices
+# Admin disables a user and all their resources
 @router.post("/deactivate-user/{user_uid}", dependencies=[Depends(verify_admin_token)])
 def deactivate_user(request: Request, user_uid: str, db: Session = Depends(get_db)):
     user = db.query(models.User).filter_by(user_uid=user_uid).first()
@@ -403,16 +403,16 @@ def deactivate_user(request: Request, user_uid: str, db: Session = Depends(get_d
     user.is_active = False
     kill_user_sessions(db, user)
 
-    # Deactivate all user's active devices
-    devices = db.query(Device).filter_by(user_uid=user_uid, status="active").all()
-    for device in devices:
-        device.status = "inactive"
-        mark_device_as_unclaimed(db, device.device_id)
-        device.device_deregistered_by = f"Auto-inactive due to admin deactivation of user {user_uid}"
-        db.add(device)
+    # Deactivate all user's active resources
+    resources = db.query(Resource).filter_by(user_uid=user_uid, status="active").all()
+    for resource in resources:
+        resource.status = "inactive"
+        mark_device_as_unclaimed(db, resource.device_id)
+        resource.device_deregistered_by = f"Auto-inactive due to admin deactivation of user {user_uid}"
+        db.add(resource)
 
     db.commit()
 
     # log user deactivation
-    log_event("info", "USER DEACTIVATED", f"User {user.username} and their devices were deactivated", request)
-    return {"message": f"User {user_uid} deactivated and devices marked as inactive"}
+    log_event("info", "USER DEACTIVATED", f"User {user.username} and their resources were deactivated", request)
+    return {"message": f"User {user_uid} deactivated and resources marked as inactive"}

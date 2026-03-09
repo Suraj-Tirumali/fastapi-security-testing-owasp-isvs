@@ -11,7 +11,7 @@ Testing focused primarily on:
 Section 2.1 – User Space Application Requirements
 
 These tests were implemented during the development of a FastAPI-based backend
-for an IoT device management platform.
+for an IoT resource management platform.
 
 ---
 
@@ -31,14 +31,14 @@ authorization_test.py
 
 ---
 
-### 2.1.2 Unique Device Identification
+### 2.1.2 Unique Resource Identification
 
 Objective:
-Ensure that each IoT device is uniquely identifiable within the ecosystem.
+Ensure that each IoT resource is uniquely identifiable within the ecosystem.
 
 Test Implementation:
-- Attempt to register duplicate device IDs across multiple users.
-- Verify that duplicate device registrations are rejected.
+- Attempt to register duplicate resource IDs across multiple users.
+- Verify that duplicate resource registrations are rejected.
 
 Test Script:
 device_identity_test.py
@@ -143,14 +143,14 @@ bruteforce_login_test.py
 
 ---
 
-### 2.1.10 Device Identity Integrity
+### 2.1.10 Resource Identity Integrity
 
 Objective:
-Ensure device ownership and identity integrity.
+Ensure resource ownership and identity integrity.
 
 Test Implementation:
-- Validate device ownership access control.
-- Prevent unauthorized device access.
+- Validate resource ownership access control.
+- Prevent unauthorized resource access.
 
 Test Script:
 device_identity_test.py
@@ -173,9 +173,9 @@ The implemented tests validate core security properties including:
 - Authentication enforcement
 - Authorization validation
 - Password policy enforcement
-- Device identity verification
+- Resource identity verification
 - Brute-force attack resistance
 - Rate limiting validation
 
 These tests help ensure the backend API follows security best practices
-for IoT device management systems.
+for IoT resource management systems.

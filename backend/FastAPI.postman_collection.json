@@ -713,10 +713,10 @@
 			]
 		},
 		{
-			"name": "device",
+			"name": "resource",
 			"item": [
 				{
-					"name": "Register Device",
+					"name": "Register Resource",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -749,13 +749,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/device/register-device",
+							"raw": "{{baseUrl}}/resource/register-resource",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"device",
-								"register-device"
+								"resource",
+								"register-resource"
 							]
 						}
 					},
@@ -785,13 +785,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/device/register-device",
+									"raw": "{{baseUrl}}/resuorce/register-resource",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"device",
-										"register-device"
+										"resuorce",
+										"register-resource"
 									]
 								}
 							},
@@ -832,13 +832,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/device/register-device",
+									"raw": "{{baseUrl}}/resource/register-resource",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"device",
-										"register-device"
+										"resource",
+										"register-resource"
 									]
 								}
 							},
@@ -857,7 +857,7 @@
 					]
 				},
 				{
-					"name": "Get Device Details",
+					"name": "Get Resource Details",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -877,13 +877,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/device/device-details",
+							"raw": "{{baseUrl}}/resource/resource-details",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"device",
-								"device-details"
+								"resource",
+								"resource-details"
 							]
 						}
 					},
@@ -904,13 +904,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/device/device-details",
+									"raw": "{{baseUrl}}/resource/resource-details",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"device",
-										"device-details"
+										"resource",
+										"resource-details"
 									]
 								}
 							},
@@ -929,7 +929,7 @@
 					]
 				},
 				{
-					"name": "Deregister Device",
+					"name": "Deregister Resource",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -949,13 +949,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/device/de-register-device/:device_id",
+							"raw": "{{baseUrl}}/resource/de-register-resource/:device_id",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"device",
-								"de-register-device",
+								"resource",
+								"de-register-resource",
 								":device_id"
 							],
 							"variable": [
@@ -984,13 +984,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/device/de-register-device/:device_id",
+									"raw": "{{baseUrl}}/resource/de-register-resource/:device_id",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"device",
-										"de-register-device",
+										"resource",
+										"de-register-resource",
 										":device_id"
 									],
 									"variable": [
@@ -1030,13 +1030,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/device/de-register-device/:device_id",
+									"raw": "{{baseUrl}}/resource/de-register-resource/:device_id",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"device",
-										"de-register-device",
+										"resource",
+										"de-register-resource",
 										":device_id"
 									],
 									"variable": [
@@ -1063,7 +1063,7 @@
 					]
 				},
 				{
-					"name": "List Inactive Devices",
+					"name": "List Inactive Resources",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1083,13 +1083,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/device/list-inactive-devices",
+							"raw": "{{baseUrl}}/resource/list-inactive-resources",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"device",
-								"list-inactive-devices"
+								"resource",
+								"list-inactive-resources"
 							]
 						}
 					},
@@ -1110,13 +1110,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/device/list-inactive-devices",
+									"raw": "{{baseUrl}}/resource/list-inactive-resources",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"device",
-										"list-inactive-devices"
+										"resource",
+										"list-inactive-resources"
 									]
 								}
 							},
@@ -1135,7 +1135,7 @@
 					]
 				},
 				{
-					"name": "Re Register Pre Owned Device",
+					"name": "Re Register Pre Owned Resource",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1168,13 +1168,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/device/re-register-device",
+							"raw": "{{baseUrl}}/resource/re-register-resource",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"device",
-								"re-register-device"
+								"resource",
+								"re-register-resource"
 							]
 						}
 					},
@@ -1204,13 +1204,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/device/re-register-device",
+									"raw": "{{baseUrl}}/resource/re-register-resource",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"device",
-										"re-register-device"
+										"resource",
+										"re-register-resource"
 									]
 								}
 							},
@@ -1251,13 +1251,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/device/re-register-device",
+									"raw": "{{baseUrl}}/resource/re-register-resource",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"device",
-										"re-register-device"
+										"resource",
+										"re-register-resource"
 									]
 								}
 							},
@@ -1353,7 +1353,7 @@
 					]
 				},
 				{
-					"name": "List All Devices",
+					"name": "List All Resources",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1373,13 +1373,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/admin/devices",
+							"raw": "{{baseUrl}}/admin/resources",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"admin",
-								"devices"
+								"resources"
 							]
 						}
 					},
@@ -1400,13 +1400,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/admin/devices",
+									"raw": "{{baseUrl}}/admin/resources",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"admin",
-										"devices"
+										"resources"
 									]
 								}
 							},
@@ -1420,12 +1420,12 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n  {\n    \"category\": \"in minim eiusmod sed\",\n    \"device_count\": -82898923,\n    \"devices\": {\n      \"commodo_44d\": 35211485\n    }\n  },\n  {\n    \"category\": \"cillum elit exercitation enim fugiat\",\n    \"device_count\": -91077366,\n    \"devices\": {\n      \"dolore_13\": 74058528\n    }\n  }\n]"
+							"body": "[\n  {\n    \"category\": \"in minim eiusmod sed\",\n    \"device_count\": -82898923,\n    \"resources\": {\n      \"commodo_44d\": 35211485\n    }\n  },\n  {\n    \"category\": \"cillum elit exercitation enim fugiat\",\n    \"device_count\": -91077366,\n    \"resources\": {\n      \"dolore_13\": 74058528\n    }\n  }\n]"
 						}
 					]
 				},
 				{
-					"name": "List Users With Devices",
+					"name": "List Users With Resources",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1445,13 +1445,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/admin/list-users-with-devices",
+							"raw": "{{baseUrl}}/admin/list-users-with-resources",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"admin",
-								"list-users-with-devices"
+								"list-users-with-resources"
 							]
 						}
 					},
@@ -1472,13 +1472,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/admin/list-users-with-devices",
+									"raw": "{{baseUrl}}/admin/list-users-with-resources",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"admin",
-										"list-users-with-devices"
+										"list-users-with-resources"
 									]
 								}
 							},
@@ -1638,7 +1638,7 @@
 					]
 				},
 				{
-					"name": "Register Device For User",
+					"name": "Register Resource For User",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1671,13 +1671,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/admin/register-device-for-user",
+							"raw": "{{baseUrl}}/admin/register-resource-for-user",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"admin",
-								"register-device-for-user"
+								"register-resource-for-user"
 							]
 						}
 					},
@@ -1707,13 +1707,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/admin/register-device-for-user",
+									"raw": "{{baseUrl}}/admin/register-resource-for-user",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"admin",
-										"register-device-for-user"
+										"register-resource-for-user"
 									]
 								}
 							},
@@ -1754,13 +1754,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/admin/register-device-for-user",
+									"raw": "{{baseUrl}}/admin/register-resource-for-user",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"admin",
-										"register-device-for-user"
+										"register-resource-for-user"
 									]
 								}
 							},
@@ -1779,7 +1779,7 @@
 					]
 				},
 				{
-					"name": "Add Device Category",
+					"name": "Add Resource Category",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1992,7 +1992,7 @@
 					]
 				},
 				{
-					"name": "Deregister Device Admin",
+					"name": "Deregister Resource Admin",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2012,13 +2012,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/admin/deregister-device/:device_id",
+							"raw": "{{baseUrl}}/admin/deregister-resource/:device_id",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"admin",
-								"deregister-device",
+								"deregister-resource",
 								":device_id"
 							],
 							"variable": [
@@ -2047,13 +2047,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/admin/deregister-device/:device_id",
+									"raw": "{{baseUrl}}/admin/deregister-resource/:device_id",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"admin",
-										"deregister-device",
+										"deregister-resource",
 										":device_id"
 									],
 									"variable": [
@@ -2093,13 +2093,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/admin/deregister-device/:device_id",
+									"raw": "{{baseUrl}}/admin/deregister-resource/:device_id",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"admin",
-										"deregister-device",
+										"deregister-resource",
 										":device_id"
 									],
 									"variable": [
@@ -2126,7 +2126,7 @@
 					]
 				},
 				{
-					"name": "List Inactive Devices",
+					"name": "List Inactive Resources",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2146,13 +2146,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/admin/list-inactive-devices",
+							"raw": "{{baseUrl}}/admin/list-inactive-resources",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"admin",
-								"list-inactive-devices"
+								"list-inactive-resources"
 							]
 						}
 					},
@@ -2173,13 +2173,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/admin/list-inactive-devices",
+									"raw": "{{baseUrl}}/admin/list-inactive-resources",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"admin",
-										"list-inactive-devices"
+										"list-inactive-resources"
 									]
 								}
 							},

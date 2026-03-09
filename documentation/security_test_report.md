@@ -2,17 +2,17 @@
 
 Author: **Suraj Tirumali**  
 Date: August 2025  
-Project: **IoT Device Management API Security Assessment**  
+Project: **IoT Resource Management API Security Assessment**  
 
 ---
 
 ## Overview
 
-This document summarizes the security testing performed on the IoT Device Management API backend developed using FastAPI. The objective of the testing was to evaluate the system’s resilience against common authentication, authorization, and API security vulnerabilities.
+This document summarizes the security testing performed on the IoT Resource Management API backend developed using FastAPI. The objective of the testing was to evaluate the system’s resilience against common authentication, authorization, and API security vulnerabilities.
 
 The testing approach was based on the **OWASP IoT Security Verification Standard (ISVS)**, specifically **Section 2.1 – User Space Application Requirements**.
 
-The API backend provides functionality for user management, device registration, and administrative control within an IoT ecosystem. Security testing was conducted to ensure that authentication mechanisms, authorization controls, password policies, and device identity validation mechanisms were correctly implemented.
+The API backend provides functionality for user management, resource registration, and administrative control within an IoT ecosystem. Security testing was conducted to ensure that authentication mechanisms, authorization controls, password policies, and resource identity validation mechanisms were correctly implemented.
 
 ---
 
@@ -23,7 +23,7 @@ The main objectives of this security testing effort were:
 - Validate authentication mechanisms
 - Verify authorization enforcement on protected endpoints
 - Ensure secure password management practices
-- Confirm unique device identification
+- Confirm unique resource identification
 - Test the system's resistance to brute-force attacks
 - Validate rate limiting controls on authentication endpoints
 
@@ -56,7 +56,7 @@ Security testing was conducted using a combination of automated scripts and manu
 Testing activities included:
 
 - Automated authentication and authorization tests
-- Device identity verification tests
+- Resource identity verification tests
 - Password policy validation tests
 - Brute-force attack simulations
 - Rate limiting validation
@@ -98,18 +98,18 @@ Authorization controls were correctly enforced, and unauthorized access attempts
 
 ---
 
-### Device Identity Validation
+### Resource Identity Validation
 
-Device identity testing ensured that every device registered in the system remains uniquely identifiable.
+Resource identity testing ensured that every resource registered in the system remains uniquely identifiable.
 
 Test cases included:
 
-- Duplicate device registration attempts
-- Cross-user device access attempts
-- Validation of device ownership rules
+- Duplicate resource registration attempts
+- Cross-user resource access attempts
+- Validation of resource ownership rules
 
 Result:  
-The system successfully prevented duplicate device registrations and maintained proper device ownership validation.
+The system successfully prevented duplicate resource registrations and maintained proper resource ownership validation.
 
 ---
 
@@ -168,7 +168,7 @@ Rate limiting controls functioned as expected and prevented excessive authentica
 The following automated scripts were used during security testing:
 
 - `authorization_test.py` – authentication and token validation tests
-- `device_identity_test.py` – duplicate device and ownership validation tests
+- `device_identity_test.py` – duplicate resource and ownership validation tests
 - `password_policy_test.py` – password policy and change validation
 - `admin_password_change_test.py` – administrative password management validation
 - `isvs_security_tests.py` – combined security test execution script
@@ -181,7 +181,7 @@ The following automated scripts were used during security testing:
 |---------------|--------|
 Authentication Testing | Passed |
 Authorization Validation | Passed |
-Device Identity Validation | Passed |
+Resource Identity Validation | Passed |
 Password Policy Validation | Passed |
 Brute Force Protection | Passed |
 Rate Limiting Validation | Passed |
@@ -199,8 +199,8 @@ Requirement **2.1.11** from the OWASP ISVS standard was not implemented during t
 
 ## Conclusion
 
-The IoT Device Management API backend successfully demonstrated compliance with multiple security controls defined in the OWASP IoT Security Verification Standard (ISVS).
+The IoT Resource Management API backend successfully demonstrated compliance with multiple security controls defined in the OWASP IoT Security Verification Standard (ISVS).
 
-The testing confirmed that the system enforces strong authentication mechanisms, prevents unauthorized access, validates device ownership, and mitigates brute-force attacks through rate limiting controls.
+The testing confirmed that the system enforces strong authentication mechanisms, prevents unauthorized access, validates resource ownership, and mitigates brute-force attacks through rate limiting controls.
 
-Overall, the backend API demonstrated strong security practices suitable for IoT device management environments.
+Overall, the backend API demonstrated strong security practices suitable for IoT resource management environments.

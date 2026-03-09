@@ -5,7 +5,7 @@ import argparse
 from urllib.parse import urlparse
 
 USER_DETAILS_URL = "http://127.0.0.1:8000/user/user_details"
-DEVICE_DETAILS_URL = "http://127.0.0.1:8000/device/device-details"
+DEVICE_DETAILS_URL = "http://127.0.0.1:8000/resource/resource-details"
 
 def check_jwt(response_json):
     token = response_json.get("access_token")
@@ -136,9 +136,9 @@ def run_idor_check(login_url, creds_file):
                 if data != baseline_data[email_b]["device_details"]:
                     print(f"IDOR detected on /deivce/deivce_details: response differs")
                 else:
-                    print(f"Access properly restricted for /device/device-details")
+                    print(f"Access properly restricted for /resource/resource-details")
             else:
-                print(f"Access denied with status code {status} for /device/device-details")
+                print(f"Access denied with status code {status} for /resource/resource-details")
 
     print("\nIDOR check completed!")
 

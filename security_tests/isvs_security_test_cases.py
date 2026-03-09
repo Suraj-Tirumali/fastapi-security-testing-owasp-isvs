@@ -17,7 +17,7 @@ BASE_URL = "http://127.0.0.1:8000"
 USER_LOGIN_URL = f"{BASE_URL}/user/login"
 ADMIN_LOGIN_URL = f"{BASE_URL}/admin/login-admin"
 USER_DETAILS_URL = f"{BASE_URL}/user/user_details"
-DEVICE_DETAILS_URL = f"{BASE_URL}/device/device-details"
+DEVICE_DETAILS_URL = f"{BASE_URL}/resource/resource-details"
 CHANGE_PWD_USER_URL = f"{BASE_URL}/user/reset-password-auth"
 CHANGE_PWD_ADMIN_URL = f"{BASE_URL}/admin/change-password"
 USER_CREATE_URL = f"{BASE_URL}/user/create-user"
@@ -107,10 +107,10 @@ def get_json(url, headers=None, log=None):
 
 # =========================
 # 2.1.1, 2.1.2, 2.1.10
-# Device ID global uniqueness
+# Resource ID global uniqueness
 # =========================
 def run_2_1_2():
-    # Open the log file for recording device ID uniqueness checks
+    # Open the log file for recording resource ID uniqueness checks
     with open(LOG_FILE_DEVICE, "w") as log:
         # Read user credentials from the specified file path
         def read_cred(file_path):
@@ -137,7 +137,7 @@ def run_2_1_2():
                 log.write(f"Login failed for {user['username']}: {e}\n")
             return None
 
-        # Fetch the list of device IDs for a given user's session (identified by JWT token)
+        # Fetch the list of resource IDs for a given user's session (identified by JWT token)
         def get_device_ids(token):
             try:
                 headers = {"Authorization": f"Bearer {token}"}
@@ -145,14 +145,14 @@ def run_2_1_2():
                 if resp.status_code == 200 and resp.content:
                     return [d.get("device_id") for d in resp.json() if "device_id" in d]
                 else:
-                    log.write(f"Device details fetch failed: {resp.status_code} - {resp.text}\n")
+                    log.write(f"Resource details fetch failed: {resp.status_code} - {resp.text}\n")
             except Exception as e:
-                log.write(f"Failed to fetch device details: {e}\n")
+                log.write(f"Failed to fetch resource details: {e}\n")
             return []
 
         # Read credentials from file
         creds = read_cred(CRED_FILE_USER)
-        # Track all device IDs and any duplicates found
+        # Track all resource IDs and any duplicates found
         all_ids, duplicates = {}, []
 
         # Iterate through each user credential set
@@ -164,7 +164,7 @@ def run_2_1_2():
                 continue
 
             device_ids = get_device_ids(token)
-            log.write(f"[{cred['username']}] Device IDs: {device_ids}\n")
+            log.write(f"[{cred['username']}] Resource IDs: {device_ids}\n")
 
             # Check for duplicates and map device_id → username
             for device_id in device_ids:
@@ -177,14 +177,14 @@ def run_2_1_2():
 
             time.sleep(2)
 
-         # Report whether duplicate device IDs were found
+         # Report whether duplicate resource IDs were found
         if duplicates:
-            log.write("\nDuplicate device IDs found across users:\n")
+            log.write("\nDuplicate resource IDs found across users:\n")
             for device_id, user_a, user_b in duplicates:
                 log.write(f" - '{device_id}' used by both {user_a} and {user_b}\n")
             return False
         else:
-            log.write("All device IDs are globally unique\n")
+            log.write("All resource IDs are globally unique\n")
             return True
 
 # =========================
@@ -255,7 +255,7 @@ def run_2_1_4(creds_file):
             tokens[email] = token
             status, user_data = get_data(token, USER_DETAILS_URL)
             _, device_data = get_data(token, DEVICE_DETAILS_URL)
-            baseline[email] = {"user": user_data, "device": device_data}
+            baseline[email] = {"user": user_data, "resource": device_data}
             time.sleep(2)
 
         vulnerable = False
@@ -274,7 +274,7 @@ def run_2_1_4(creds_file):
                     vulnerable = True
 
                 status, data = get_data(tokenB, DEVICE_DETAILS_URL)
-                if status == 200 and data != baseline[B]["device"]:
+                if status == 200 and data != baseline[B]["resource"]:
                     log.write(f"IDOR on DEVICE_DETAILS from {B} to {A}\n")
                     vulnerable = True
 
@@ -596,7 +596,7 @@ if __name__ == "__main__":
     # Run each test based on flags
     if args.all or args.__dict__["2.1.2"]:
         passed = run_2_1_2()
-        log_result("2.1.1, 2.1.2, 2.1.10", "Device ID uniqueness check", passed)
+        log_result("2.1.1, 2.1.2, 2.1.10", "Resource ID uniqueness check", passed)
 
     if args.all or args.__dict__["2.1.4"]:
         creds_file = args.idor or CRED_FILE_USER
