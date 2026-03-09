@@ -39,7 +39,7 @@ logger.propagate = False
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # -------------------------------
-# Loading environment varialbles
+# Loading environment variables
 # -------------------------------
 env_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
@@ -48,7 +48,7 @@ load_dotenv(dotenv_path=env_path)
 # JWT configuration
 # -----------------------------
 SECRET_KEY = os.getenv("SECRET_KEY")
-ADMIN_SECRET_KEY = os.getenv("ADMIN_SECRET_KEY")
+MANAGER_SECRET_KEY = os.getenv("MANAGER_SECRET_KEY")
 ALGORITHM = "HS256"
 RESET_TOKEN_EXPIRE_MINUTES = 15
 
@@ -58,7 +58,7 @@ RESET_TOKEN_EXPIRE_MINUTES = 15
 token_auth_scheme = HTTPBearer()
 
 # -----------------------------
-# Digits for UID/device generation
+# Digits for UID/resource generation
 # -----------------------------
 DIGITS = "0123456789"
 
@@ -137,9 +137,9 @@ def generate_numeric_uid(length: int = 12) -> str:
     return ''.join(random.choices(DIGITS, k=length))
 
 # -----------------------------
-# Generate device ID: prefix + 4-digit random + last 4 of user UID
+# Generate resource ID: prefix + 4-digit random + last 4 of user UID
 # -----------------------------
-def generate_device_id(prefix: str, user_uid: str) -> str:
+def generate_resource_id(prefix: str, user_uid: str) -> str:
     random_mid = ''.join(random.choices(DIGITS, k=4))
     suffix = user_uid[-4:]
     return prefix + random_mid + suffix
@@ -177,14 +177,14 @@ def get_token(creds: HTTPAuthorizationCredentials = Depends(token_auth_scheme)) 
     return creds.credentials
 
 # -----------------------------
-# Verify token and ensure role=admin
+# Verify token and ensure role=manager
 # -----------------------------
-def verify_admin_token(creds: HTTPAuthorizationCredentials = Depends(token_auth_scheme)) -> dict:
+def verify_manager_token(creds: HTTPAuthorizationCredentials = Depends(token_auth_scheme)) -> dict:
     token = creds.credentials
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        if payload.get("role") != "admin":
-            raise HTTPException(status_code=403, detail="Access restricted to admin only")
+        if payload.get("role") != "manager":
+            raise HTTPException(status_code=403, detail="Access restricted to manager only")
         return payload
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid or Expired token")
@@ -208,18 +208,18 @@ def get_current_user(token: str = Depends(get_token), db: Session = Depends(get_
     if not user:
         raise HTTPException(status_code=403, detail="User not found")
     if not user.is_active:
-        raise HTTPException(status_code=403, detail="User access is revoked by admin")
+        raise HTTPException(status_code=403, detail="User access is revoked by manager")
     if user.last_token_issued_at.timestamp() > issued_at:
-        raise HTTPException(status_code=403, detail="Session invalidated by admin")
+        raise HTTPException(status_code=403, detail="Session invalidated by manager")
 
     return user
 
 # -----------------------------
-# Check if current user has admin role
+# Check if current user has manager role
 # -----------------------------
-def get_current_admin_user(user: models.User = Depends(get_current_user)) -> models.User:
-    if user.role != "admin":
-        raise HTTPException(status_code=403, detail="Admin access only")
+def get_current_manager_user(user: models.User = Depends(get_current_user)) -> models.User:
+    if user.role != "manager":
+        raise HTTPException(status_code=403, detail="Manager access only")
     return user
 
 # -----------------------------
@@ -246,10 +246,10 @@ def send_whatsapp_with_temp(to_number: str, rst_link: str):
 # -----------------------------
 # Maintain ownership trail and update on registration
 # -----------------------------
-def update_device_ownership_on_registration(db: Session, device_id: str, new_owner: str, category: str):
+def update_resource_ownership_on_registration(db: Session, resource_id: str, new_owner: str, category: str):
     try:
-        device_id = device_id.strip()
-        ownership = db.query(models.DeviceOwnership).filter_by(device_id=device_id).first()
+        resource_id = resource_id.strip()
+        ownership = db.query(models.ResourceOwnership).filter_by(resource_id=resource_id).first()
 
         if ownership:
             if ownership.current_owner.lower() != "unclaimed":
@@ -259,8 +259,8 @@ def update_device_ownership_on_registration(db: Session, device_id: str, new_own
             ownership.category = category
             db.commit()
         else:
-            new_entry = models.DeviceOwnership(
-                device_id=device_id,
+            new_entry = models.ResourceOwnership(
+                resource_id=resource_id,
                 category=category,
                 previous_owners="",
                 current_owner=new_owner
@@ -272,10 +272,10 @@ def update_device_ownership_on_registration(db: Session, device_id: str, new_own
         raise HTTPException(status_code=500, detail=f"Failed to register ownership: {str(e)}")
 
 # -----------------------------
-# Mark a device as unclaimed and record previous owner
+# Mark a resource as unclaimed and record previous owner
 # -----------------------------
-def mark_device_as_unclaimed(db: Session, device_id: str):
-    ownership = db.query(models.DeviceOwnership).filter_by(device_id=device_id).first()
+def mark_resource_as_unclaimed(db: Session, resource_id: str):
+    ownership = db.query(models.ResourceOwnership).filter_by(resource_id=resource_id).first()
 
     if ownership:
         previous = ownership.previous_owners.split(",") if ownership.previous_owners else []
@@ -286,7 +286,7 @@ def mark_device_as_unclaimed(db: Session, device_id: str):
         ownership.current_owner = "unclaimed"
     
     # Log the ownership update
-    log_event("info", "OWNERSHIP UPDATE", f"Device {device_id} marked as unclaimed")
+    log_event("info", "OWNERSHIP UPDATE", f"Resource {resource_id} marked as unclaimed")
     db.commit()
 
 # -----------------------------
