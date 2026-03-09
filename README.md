@@ -1,4 +1,4 @@
-# IoT API Security Testing using FastAPI and OWASP ISVS
+# Secure Resource Management API – FastAPI Security Testing using OWASP ISVS
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
@@ -8,7 +8,7 @@
 
 FastAPI based backend API with automated security testing aligned with the **OWASP IoT Security Verification Standard (ISVS)**.
 
-This project demonstrates authentication validation, authorization enforcement, password policy testing, brute-force attack simulation, and rate limiting verification for IoT resource management APIs.
+This project demonstrates authentication validation, authorization enforcement, password policy testing, brute-force attack simulation, and rate limiting verification for IoT resource management systems.
 
 ## Overview
 
@@ -67,7 +67,7 @@ iot-api-security-testing-isvs
 │   ├── authorization_test.py
 │   ├── password_policy_test.py
 │   ├── admin_password_change_test.py
-│   ├── device_identity_test.py
+│   ├── resource_identity_test.py
 │   └── isvs_security_tests.py
 │
 ├── documentation
@@ -141,8 +141,6 @@ Testing focused on **Section 2.1 – User Space Application Requirements**.
 | 2.1.8 | Administrative password validation |
 | 2.1.9 | Brute-force attack protection |
 | 2.1.10 | Resource identity integrity |
-
-Control **2.1.11** was not implemented due to project timeline constraints during development.
 
 Detailed mapping between test scripts and ISVS controls is available in:
 `documentation/isvs_mapping.md`
@@ -236,4 +234,4 @@ This project is intended for educational and demonstration purposes only.
 
 **Suraj Tirumali**
 
-This project was developed during an internship focused on **IoT backend development and API security testing** using OWASP security guidelines.
+This project was developed as a practical exploration of backend API security testing and OWASP IoT Security Verification Standard (ISVS) compliance.
