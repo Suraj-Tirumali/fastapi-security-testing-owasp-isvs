@@ -2,28 +2,28 @@ import requests
 import time
 
 BASE_URL = "http://127.0.0.1:8000"
-ADMIN_LOGIN_URL = f"{BASE_URL}/admin/login-admin"
+MANAGER_LOGIN_URL = f"{BASE_URL}/manager/login-manager"
 USER_LOGIN_URL = f"{BASE_URL}/user/login"
-CHANGE_PWD_URL = f"{BASE_URL}/admin/change-password"
+CHANGE_PWD_URL = f"{BASE_URL}/manager/change-password"
 CRED_FILE = "creds.txt"
-LOG_FILE = "admin_pwd_change.log"
+LOG_FILE = "manager_pwd_change.log"
 
 def read_creds(file_path):
-    users, admins = [], []
+    users, managers = [], []
     with open(file_path, "r") as f:
         for line in f:
             if line.strip():
                 parts = line.strip().split(',')
                 if len(parts) == 3:
                     entry = {"email": parts[0], "password": parts[1], "role": parts[2]}
-                    if parts[2].lower() == "admin":
-                        admins.append(entry)
+                    if parts[2].lower() == "manager":
+                        managers.append(entry)
                     elif parts[2].lower() == "user":
                         users.append(entry)
-    return admins, users
+    return managers, users
 
 def login(email, password, role="user"):
-    url = ADMIN_LOGIN_URL if role.lower() == "admin" else USER_LOGIN_URL
+    url = MANAGER_LOGIN_URL if role.lower() == "manager" else USER_LOGIN_URL
     payload = {"username_or_email": email, "password": password}
     try:
         resp = requests.post(url, json=payload)
@@ -33,7 +33,7 @@ def login(email, password, role="user"):
         print(f"Login error for {email}: {e}")
     return None
 
-def admin_change_pwd(token, user_email, new_password):
+def manager_change_pwd(token, user_email, new_password):
     headers = {"Authorization": f"Bearer {token}"}
     payload = {
         "email": user_email,
@@ -51,24 +51,24 @@ def log_event(message):
         log.write(f"{time.ctime()} | {message}\n")
 
 def main():
-    admins, users = read_creds(CRED_FILE)
-    if not admins:
-        print("No admin credentials found in the file.")
+    managers, users = read_creds(CRED_FILE)
+    if not managers:
+        print("No manager credentials found in the file.")
         return
     
-    admin = admins[0]
-    admin_email = admin["email"]
-    admin_pwd = admin["password"]
+    manager = managers[0]
+    manager_email = manager["email"]
+    manager_pwd = manager["password"]
 
-    print(f"Logging in as admin: {admin_email}")
-    admin_token = login(admin_email, admin_pwd, role="admin")
-    if not admin_token:
-        log_event(f"[ADMIN LOGIN FAILED] {admin_email}")
-        print(f"Admin login failed for {admin_email}.")
+    print(f"Logging in as manager: {manager_email}")
+    manager_token = login(manager_email, manager_pwd, role="manager")
+    if not manager_token:
+        log_event(f"[MANAGER LOGIN FAILED] {manager_email}")
+        print(f"Manager login failed for {manager_email}.")
         return
     
-    log_event(f"[ADMIN LOGIN] Success for {admin_email}")
-    print("Admin login successful\n")
+    log_event(f"[MANAGER LOGIN] Success for {manager_email}")
+    print("Manager login successful\n")
 
     for user in users:
         user_email = user["email"]
@@ -76,7 +76,7 @@ def main():
         new_pwd = f"{old_pwd}_New"
 
         print(f"Changing password for user: {user_email}")
-        success, message = admin_change_pwd(admin_token, user_email, new_pwd)
+        success, message = manager_change_pwd(manager_token, user_email, new_pwd)
         if success:
             log_event(f"[PASSWORD CHANGE]  Success for {user_email} from {old_pwd} to {new_pwd}")
             print(f"Password changed successfully for {user_email}")
@@ -86,7 +86,7 @@ def main():
                 log_event(f"[USER LOGIN] Success with new password for {user_email}")
                 print(f"User login successful with new password for {user_email}")
 
-                reverted, revert_msg = admin_change_pwd(admin_token, user_email, old_pwd)
+                reverted, revert_msg = manager_change_pwd(manager_token, user_email, old_pwd)
                 if reverted:
                     log_event(f"[REVERT] Reverted password for {user_email} back to {old_pwd}")
                     print(f"Password reverted successfully for {user_email}")
@@ -101,7 +101,7 @@ def main():
             log_event(f"[PASSWORD CHANGE FAILED] Could not change password for {user_email}: {message}")
             print(f"Password change failed for {user_email}")
     
-    print("\nAdmin change password test completed.")
+    print("\nManager change password test completed.")
 
 if __name__ == "__main__":
     main()
