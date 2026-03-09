@@ -47,7 +47,7 @@ Tests were executed to validate authentication flows, access control mechanisms,
 ```
 iot-api-security-testing-isvs
 │
-├── api_backend
+├── backend
 │   ├── app
 │   │   ├── admin.py
 │   │   ├── database.py
