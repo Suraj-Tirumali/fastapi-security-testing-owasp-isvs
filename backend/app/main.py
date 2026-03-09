@@ -26,7 +26,7 @@ from app.database import engine
 from app import models
 from app.user import router as user_router
 from app.resource import router as resource_router
-from app.admin import router as admin_router
+from app.manager import router as manager_router
 from app.utils import log_event
 from app.limiter_config import limiter
 
@@ -109,7 +109,7 @@ app.add_middleware(PayloadLimitMiddleware)
 # -----------------------------
 app.include_router(user_router)
 app.include_router(resource_router)
-app.include_router(admin_router)
+app.include_router(manager_router)
 
 # -----------------------------
 # Custom middleware for root redirect and logging
