@@ -15,16 +15,16 @@ BASE_URL = "http://127.0.0.1:8000"
 
 # API endpoints
 USER_LOGIN_URL = f"{BASE_URL}/user/login"
-ADMIN_LOGIN_URL = f"{BASE_URL}/admin/login-admin"
+MANAGER_LOGIN_URL = f"{BASE_URL}/manager/login-manager"
 USER_DETAILS_URL = f"{BASE_URL}/user/user_details"
-DEVICE_DETAILS_URL = f"{BASE_URL}/resource/resource-details"
+RESOURCE_DETAILS_URL = f"{BASE_URL}/resource/resource-details"
 CHANGE_PWD_USER_URL = f"{BASE_URL}/user/reset-password-auth"
-CHANGE_PWD_ADMIN_URL = f"{BASE_URL}/admin/change-password"
+CHANGE_PWD_MANAGER_URL = f"{BASE_URL}/manager/change-password"
 USER_CREATE_URL = f"{BASE_URL}/user/create-user"
 
 # Credential File paths
 CRED_FILE_USER = "cred.txt"                 # used by 2.1.2 and 2.1.4 (email,password per line)
-CRED_FILE_ADMIN = "creds.txt"               # mixed admin/users file: email,password,role
+CRED_FILE_MANAGER = "creds.txt"               # mixed manager/users file: email,password,role
 CRED_FILE_USER_CHANGE = "credentials.txt"   # email,old_password,new_password for 2.1.6
 
 # Rate limit / retry
@@ -35,10 +35,10 @@ MAX_RETRIES = 3
 LOG_DIR = "result-folder"
 os.makedirs(LOG_DIR, exist_ok=True)
 RESULT_FILE = os.path.join(LOG_DIR, "result.txt")
-LOG_FILE_ADMIN = os.path.join(LOG_DIR, "admin_pwd_change.log")
+LOG_FILE_MANAGER = os.path.join(LOG_DIR, "manager_pwd_change.log")
 LOG_FILE_USER = os.path.join(LOG_DIR, "user_pwd_change.log")
 LOG_FILE_IDOR = os.path.join(LOG_DIR, "auth_idor_check.log")
-LOG_FILE_DEVICE = os.path.join(LOG_DIR, "device_uniqueness.log")
+LOG_FILE_RESOURCE = os.path.join(LOG_DIR, "resource_uniqueness.log")
 LOG_FILE_PASSWORD_STRENGTH = os.path.join(LOG_DIR, "password_strength.log")
 
 test_results = []
@@ -111,7 +111,7 @@ def get_json(url, headers=None, log=None):
 # =========================
 def run_2_1_2():
     # Open the log file for recording resource ID uniqueness checks
-    with open(LOG_FILE_DEVICE, "w") as log:
+    with open(LOG_FILE_RESOURCE, "w") as log:
         # Read user credentials from the specified file path
         def read_cred(file_path):
             users = []
@@ -138,12 +138,12 @@ def run_2_1_2():
             return None
 
         # Fetch the list of resource IDs for a given user's session (identified by JWT token)
-        def get_device_ids(token):
+        def get_resource_ids(token):
             try:
                 headers = {"Authorization": f"Bearer {token}"}
-                resp = get_json(DEVICE_DETAILS_URL, headers=headers, log=log)
+                resp = get_json(RESOURCE_DETAILS_URL, headers=headers, log=log)
                 if resp.status_code == 200 and resp.content:
-                    return [d.get("device_id") for d in resp.json() if "device_id" in d]
+                    return [d.get("resource_id") for d in resp.json() if "resource_id" in d]
                 else:
                     log.write(f"Resource details fetch failed: {resp.status_code} - {resp.text}\n")
             except Exception as e:
@@ -163,25 +163,25 @@ def run_2_1_2():
                 log.write(f"Could not login as {cred['username']}\n")
                 continue
 
-            device_ids = get_device_ids(token)
-            log.write(f"[{cred['username']}] Resource IDs: {device_ids}\n")
+            resource_ids = get_resource_ids(token)
+            log.write(f"[{cred['username']}] Resource IDs: {resource_ids}\n")
 
-            # Check for duplicates and map device_id → username
-            for device_id in device_ids:
-                if not device_id:
+            # Check for duplicates and map resource_id → username
+            for resource_id in resource_ids:
+                if not resource_id:
                     continue
-                if device_id in all_ids:
-                    duplicates.append((device_id, all_ids[device_id], cred['username']))
+                if resource_id in all_ids:
+                    duplicates.append((resource_id, all_ids[resource_id], cred['username']))
                 else:
-                    all_ids[device_id] = cred['username']
+                    all_ids[resource_id] = cred['username']
 
             time.sleep(2)
 
          # Report whether duplicate resource IDs were found
         if duplicates:
             log.write("\nDuplicate resource IDs found across users:\n")
-            for device_id, user_a, user_b in duplicates:
-                log.write(f" - '{device_id}' used by both {user_a} and {user_b}\n")
+            for resource_id, user_a, user_b in duplicates:
+                log.write(f" - '{resource_id}' used by both {user_a} and {user_b}\n")
             return False
         else:
             log.write("All resource IDs are globally unique\n")
@@ -254,8 +254,8 @@ def run_2_1_4(creds_file):
             token = resp["access_token"]
             tokens[email] = token
             status, user_data = get_data(token, USER_DETAILS_URL)
-            _, device_data = get_data(token, DEVICE_DETAILS_URL)
-            baseline[email] = {"user": user_data, "resource": device_data}
+            _, resource_data = get_data(token, RESOURCE_DETAILS_URL)
+            baseline[email] = {"user": user_data, "resource": resource_data}
             time.sleep(2)
 
         vulnerable = False
@@ -273,9 +273,9 @@ def run_2_1_4(creds_file):
                     log.write(f"IDOR on USER_DETAILS from {B} to {A}\n")
                     vulnerable = True
 
-                status, data = get_data(tokenB, DEVICE_DETAILS_URL)
+                status, data = get_data(tokenB, RESOURCE_DETAILS_URL)
                 if status == 200 and data != baseline[B]["resource"]:
-                    log.write(f"IDOR on DEVICE_DETAILS from {B} to {A}\n")
+                    log.write(f"IDOR on RESOURCE_DETAILS from {B} to {A}\n")
                     vulnerable = True
 
                 time.sleep(RATE_LIMIT_SLEEP)
@@ -472,7 +472,7 @@ def run_2_1_6():
                 log.write("Weak new password (skipping this candidate)\n")
                 continue
 
-            # Try original; if that fails, try original+"_NEW" in case admin changed earlier
+            # Try original; if that fails, try original+"_NEW" in case manager changed earlier
             t = login(e, o)
             time.sleep(RATE_LIMIT_SLEEP)
             if not t:
@@ -506,55 +506,55 @@ def run_2_1_6():
 
 # =========================
 # 2.1.8
-# Admin password change
+# Manager password change
 # =========================
 def run_2_1_8():
-    with open(LOG_FILE_ADMIN, "w") as log:
+    with open(LOG_FILE_MANAGER, "w") as log:
 
-        # Read admin and user credentials from the admin credential file
+        # Read manager and user credentials from the manager credential file
         def read():
             a, u = [], []
-            with open(CRED_FILE_ADMIN, "r") as f:
+            with open(CRED_FILE_MANAGER, "r") as f:
                 for l in f:
                     p = l.strip().split(",")
                     if len(p) == 3:
-                        (a if p[2].lower() == "admin" else u).append({"email": p[0], "password": p[1]})
+                        (a if p[2].lower() == "manager" else u).append({"email": p[0], "password": p[1]})
             return a, u
 
-        # Login either as admin or user based on `is_admin` flag
-        def login(e, p, is_admin=False):
-            url = ADMIN_LOGIN_URL if is_admin else USER_LOGIN_URL
+        # Login either as manager or user based on `is_manager` flag
+        def login(e, p, is_manager=False):
+            url = MANAGER_LOGIN_URL if is_manager else USER_LOGIN_URL
             try:
                 r = post_json(url, {"username_or_email": e, "password": p}, log=log)
                 return r.json().get("access_token") if r.status_code == 200 else None
             except Exception as ex:
                 log.write(f"[ERROR] Login exception: {ex}\n")
                 return None
-        # Use admin token to change any user's password
+        # Use manager token to change any user's password
         def change(t, e, new):
             h = {"Authorization": f"Bearer {t}"}
             p = {"email": e, "new_password": new, "confirm_password": new}
             try:
-                r = post_json(CHANGE_PWD_ADMIN_URL, p, headers=h, log=log)
-                log.write(f"[DEBUG] Admin change password response for {e}: {r.status_code} - {r.text}\n")
+                r = post_json(CHANGE_PWD_MANAGER_URL, p, headers=h, log=log)
+                log.write(f"[DEBUG] Manager change password response for {e}: {r.status_code} - {r.text}\n")
                 return r.status_code == 200
             except Exception as ex:
                 log.write(f"[ERROR] Exception while changing password: {ex}\n")
                 return False
 
         # load credentails
-        admins, users = read()
-        if not admins:
+        managers, users = read()
+        if not managers:
             return False
-        # Take the first admin
-        a = admins[0]
+        # Take the first manager
+        a = managers[0]
         at = login(a["email"], a["password"], True)
         time.sleep(RATE_LIMIT_SLEEP)
         if not at:
             return False
 
         success = True
-        # For each user, attempt to change their password using admin access
+        # For each user, attempt to change their password using manager access
         for u in users:
             old = u["password"]
             new = old + "_New#2025"  # strong suffix
@@ -613,7 +613,7 @@ if __name__ == "__main__":
 
     if args.all or args.__dict__["2.1.8"]:
         passed = run_2_1_8()
-        log_result("2.1.8", "Admin password change", passed)
+        log_result("2.1.8", "Manager password change", passed)
 
     # Write Results Summary
     if test_results:
