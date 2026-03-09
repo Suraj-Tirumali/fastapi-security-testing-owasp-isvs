@@ -121,11 +121,11 @@ Objective:
 Ensure administrators follow the same secure password policies.
 
 Test Implementation:
-- Admin password change validation.
+- Manager password change validation.
 - Authentication enforcement for administrative actions.
 
 Test Script:
-admin_password_change_test.py
+manager_password_change_test.py
 
 ---
 
@@ -153,7 +153,7 @@ Test Implementation:
 - Prevent unauthorized resource access.
 
 Test Script:
-device_identity_test.py
+resource_identity_test.py
 
 ---
 
