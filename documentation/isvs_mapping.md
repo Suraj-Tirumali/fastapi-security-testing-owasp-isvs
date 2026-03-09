@@ -41,7 +41,7 @@ Test Implementation:
 - Verify that duplicate resource registrations are rejected.
 
 Test Script:
-device_identity_test.py
+resource_identity_test.py
 
 ---
 
