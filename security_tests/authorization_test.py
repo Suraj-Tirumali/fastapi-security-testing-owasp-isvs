@@ -5,7 +5,7 @@ import argparse
 from urllib.parse import urlparse
 
 USER_DETAILS_URL = "http://127.0.0.1:8000/user/user_details"
-DEVICE_DETAILS_URL = "http://127.0.0.1:8000/resource/resource-details"
+RESOURCE_DETAILS_URL = "http://127.0.0.1:8000/resource/resource-details"
 
 def check_jwt(response_json):
     token = response_json.get("access_token")
@@ -103,12 +103,12 @@ def run_idor_check(login_url, creds_file):
     print(f"Accessing protected endpoints")
     for email, token in users.items():
         user_status, user_data = get_protected_details(token, USER_DETAILS_URL)
-        device_status, device_data = get_protected_details(token, DEVICE_DETAILS_URL)
+        resource_status, resource_data = get_protected_details(token, RESOURCE_DETAILS_URL)
 
         baseline_data[email] = {
             "token": token,
             "user_details": user_data if user_status ==  200 else {},
-            "device_details": device_data if device_status == 200 else {}
+            "resource_details": resource_data if resource_status == 200 else {}
         }
     print(f"\nSwapping tokens and checking for IDOR vulnerablities\n")
 
@@ -131,9 +131,9 @@ def run_idor_check(login_url, creds_file):
             else:
                 print(f"Access denied with status code {status} for /user/user_details")
 
-            status, data = get_protected_details(token_b, DEVICE_DETAILS_URL)
+            status, data = get_protected_details(token_b, RESOURCE_DETAILS_URL)
             if status == 200:
-                if data != baseline_data[email_b]["device_details"]:
+                if data != baseline_data[email_b]["resource_details"]:
                     print(f"IDOR detected on /deivce/deivce_details: response differs")
                 else:
                     print(f"Access properly restricted for /resource/resource-details")
