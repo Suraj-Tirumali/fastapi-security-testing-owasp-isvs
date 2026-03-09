@@ -1,0 +1,2265 @@
+{
+	"info": {
+		"_postman_id": "a0da7cc8-e531-40e3-b002-d2f69d4e6c93",
+		"name": "FastAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40708786"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"QITAnYYt9@DyiqGxWo.nep\",\n  \"phone_number\": \"aliqua nostr\",\n  \"password\": \"occaecat deserunt\",\n  \"role\": \"Excepteur anim aliquip eiusmod\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/create-user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"create-user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"QITAnYYt9@DyiqGxWo.nep\",\n  \"phone_number\": \"aliqua nostr\",\n  \"password\": \"occaecat deserunt\",\n  \"role\": \"Excepteur anim aliquip eiusmod\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/create-user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"create-user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"uid\": \"Duis ut\",\n  \"username\": \"cillu\",\n  \"email\": \"ysAp7o4ZTQiW@IiPsBOaGkXkyTCPz.zj\",\n  \"phone_number\": \"quis in\",\n  \"role\": \"voluptate amet\"\n}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"QITAnYYt9@DyiqGxWo.nep\",\n  \"phone_number\": \"aliqua nostr\",\n  \"password\": \"occaecat deserunt\",\n  \"role\": \"Excepteur anim aliquip eiusmod\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/create-user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"create-user"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username_or_email\": \"Lorem et\",\n  \"password\": \"Duis paria\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username_or_email\": \"Lorem et\",\n  \"password\": \"Duis paria\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username_or_email\": \"Lorem et\",\n  \"password\": \"Duis paria\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/user_details",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"user_details"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/user/user_details",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"user_details"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"uid\": \"Duis ut\",\n  \"username\": \"cillu\",\n  \"email\": \"ysAp7o4ZTQiW@IiPsBOaGkXkyTCPz.zj\",\n  \"phone_number\": \"quis in\",\n  \"role\": \"voluptate amet\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone\": \"consequat aute\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/forgot-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"forgot-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"phone\": \"consequat aute\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/forgot-password",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"forgot-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"phone\": \"consequat aute\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/forgot-password",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"forgot-password"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"new_password\": \"cupidatat elit quis amet magna\",\n  \"confirm_password\": \"tempor ipsum\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/reset-password/:token",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"reset-password",
+								":token"
+							],
+							"variable": [
+								{
+									"key": "token",
+									"value": "sit in",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"new_password\": \"cupidatat elit quis amet magna\",\n  \"confirm_password\": \"tempor ipsum\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/reset-password/:token",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"reset-password",
+										":token"
+									],
+									"variable": [
+										{
+											"key": "token",
+											"value": "sit in",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"new_password\": \"cupidatat elit quis amet magna\",\n  \"confirm_password\": \"tempor ipsum\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/reset-password/:token",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"reset-password",
+										":token"
+									],
+									"variable": [
+										{
+											"key": "token",
+											"value": "sit in",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Reset Password Authenticated",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"ullamco dolore i\",\n  \"current_password\": \"in ex\",\n  \"new_password\": \"eiusmod incididunt pariatur \",\n  \"confirm_password\": \"amet do cillum velit\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/reset-password-auth",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"reset-password-auth"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"ullamco dolore i\",\n  \"current_password\": \"in ex\",\n  \"new_password\": \"eiusmod incididunt pariatur \",\n  \"confirm_password\": \"amet do cillum velit\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/reset-password-auth",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"reset-password-auth"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"ullamco dolore i\",\n  \"current_password\": \"in ex\",\n  \"new_password\": \"eiusmod incididunt pariatur \",\n  \"confirm_password\": \"amet do cillum velit\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/reset-password-auth",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"reset-password-auth"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "device",
+			"item": [
+				{
+					"name": "Register Device",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"fabPBoxSVTGlth5@YAKUTcQnbVLbkDfmMPlMtYEKgZD.jcag\",\n  \"category\": \"proident\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/device/register-device",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"device",
+								"register-device"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"fabPBoxSVTGlth5@YAKUTcQnbVLbkDfmMPlMtYEKgZD.jcag\",\n  \"category\": \"proident\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/device/register-device",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"device",
+										"register-device"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"device_id\": \"laboris Lorem minim\",\n  \"category\": \"pariatur sit ipsum\",\n  \"user_uid\": \"nostrud incididunt nisi\",\n  \"username\": \"ad in\"\n}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"fabPBoxSVTGlth5@YAKUTcQnbVLbkDfmMPlMtYEKgZD.jcag\",\n  \"category\": \"proident\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/device/register-device",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"device",
+										"register-device"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Device Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/device/device-details",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"device",
+								"device-details"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/device/device-details",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"device",
+										"device-details"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"device_id\": \"incid\",\n    \"category\": \"quis incididunt ipsum dolor\",\n    \"user_id\": \"elit dolor incididunt id\",\n    \"username\": \"Ut sint in labore\",\n    \"status\": \"Ut in et Lorem\"\n  },\n  {\n    \"device_id\": \"labore\",\n    \"category\": \"es\",\n    \"user_id\": \"aliqua irure in occaecat\",\n    \"username\": \"irure in\",\n    \"status\": \"nostrud ut\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Deregister Device",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/device/de-register-device/:device_id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"device",
+								"de-register-device",
+								":device_id"
+							],
+							"variable": [
+								{
+									"key": "device_id",
+									"value": "",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/device/de-register-device/:device_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"device",
+										"de-register-device",
+										":device_id"
+									],
+									"variable": [
+										{
+											"key": "device_id",
+											"value": "",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/device/de-register-device/:device_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"device",
+										"de-register-device",
+										":device_id"
+									],
+									"variable": [
+										{
+											"key": "device_id",
+											"value": "",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List Inactive Devices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/device/list-inactive-devices",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"device",
+								"list-inactive-devices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/device/list-inactive-devices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"device",
+										"list-inactive-devices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"device_id\": \"incididunt\",\n    \"category\": \"q\",\n    \"status\": \"quis exercitation enim\"\n  },\n  {\n    \"device_id\": \"nulla velit aliquip incididunt\",\n    \"category\": \"quis enim fugiat\",\n    \"status\": \"est adipisicing\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Re Register Pre Owned Device",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"device_id\": \"tempor reprehenderit do deserunt nostrud\",\n  \"category\": \"deserunt eiusmod labore\",\n  \"username\": \"et\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/device/re-register-device",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"device",
+								"re-register-device"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"device_id\": \"tempor reprehenderit do deserunt nostrud\",\n  \"category\": \"deserunt eiusmod labore\",\n  \"username\": \"et\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/device/re-register-device",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"device",
+										"re-register-device"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"device_id\": \"tempor reprehenderit do deserunt nostrud\",\n  \"category\": \"deserunt eiusmod labore\",\n  \"username\": \"et\"\n}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"device_id\": \"tempor reprehenderit do deserunt nostrud\",\n  \"category\": \"deserunt eiusmod labore\",\n  \"username\": \"et\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/device/re-register-device",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"device",
+										"re-register-device"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "List All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/admin/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"uid\": \"deserunt\",\n    \"username\": \"incididunt amet proid\",\n    \"email\": \"wpF6I-Elt3Vn@efVZYwhkxOCQfZks.pu\",\n    \"phone_number\": \"adipisicing ex qui\",\n    \"role\": \"dolore sit Lorem magna\"\n  },\n  {\n    \"uid\": \"esse labore\",\n    \"username\": \"sint in sunt exercitation\",\n    \"email\": \"TmRfkEGp7LuQv@ZhwqPZcstZAyBPoPBvkLzRIfYBbgXbB.lbxt\",\n    \"phone_number\": \"sint mollit eni\",\n    \"role\": \"reprehenderit esse est\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "List All Devices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/devices",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"devices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/admin/devices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"devices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"category\": \"in minim eiusmod sed\",\n    \"device_count\": -82898923,\n    \"devices\": {\n      \"commodo_44d\": 35211485\n    }\n  },\n  {\n    \"category\": \"cillum elit exercitation enim fugiat\",\n    \"device_count\": -91077366,\n    \"devices\": {\n      \"dolore_13\": 74058528\n    }\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "List Users With Devices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/list-users-with-devices",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"list-users-with-devices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/admin/list-users-with-devices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"list-users-with-devices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"user_uid\": \"id ea enim\",\n    \"username\": \"Duis cupidatat sed fugiat\",\n    \"email\": \"veniam\",\n    \"phone\": \"in anim\"\n  },\n  {\n    \"user_uid\": \"nulla Duis consectetur veniam\",\n    \"username\": \"quis sunt\",\n    \"email\": \"esse eu anim Excepteur\",\n    \"phone\": \"eiusmod pariatur tempor sint ea\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Admin Change Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"ipsum\",\n  \"new_password\": \"commodoeiusmod qui enim laborum\",\n  \"confirm_password\": \"est nisi Excepteur\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/change-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"change-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"ipsum\",\n  \"new_password\": \"commodoeiusmod qui enim laborum\",\n  \"confirm_password\": \"est nisi Excepteur\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/admin/change-password",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"change-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"ipsum\",\n  \"new_password\": \"commodoeiusmod qui enim laborum\",\n  \"confirm_password\": \"est nisi Excepteur\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/admin/change-password",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"change-password"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Register Device For User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"fabPBoxSVTGlth5@YAKUTcQnbVLbkDfmMPlMtYEKgZD.jcag\",\n  \"category\": \"proident\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/register-device-for-user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"register-device-for-user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"fabPBoxSVTGlth5@YAKUTcQnbVLbkDfmMPlMtYEKgZD.jcag\",\n  \"category\": \"proident\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/admin/register-device-for-user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"register-device-for-user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"fabPBoxSVTGlth5@YAKUTcQnbVLbkDfmMPlMtYEKgZD.jcag\",\n  \"category\": \"proident\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/admin/register-device-for-user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"register-device-for-user"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Device Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"ad sit qui\",\n  \"prefix\": \"ea nostrud\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/add-category",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"add-category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"ad sit qui\",\n  \"prefix\": \"ea nostrud\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/admin/add-category",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"add-category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"ex elit esse\",\n  \"prefix\": \"Excepteur Lorem ad aute tempor\"\n}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"ad sit qui\",\n  \"prefix\": \"ea nostrud\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/admin/add-category",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"add-category"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/admin/categories",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"name\": \"voluptate irure\",\n    \"prefix\": \"dolor nisi\"\n  },\n  {\n    \"name\": \"ipsum Lorem\",\n    \"prefix\": \"exercitation minim adipisicing sint amet\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Deregister Device Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/deregister-device/:device_id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"deregister-device",
+								":device_id"
+							],
+							"variable": [
+								{
+									"key": "device_id",
+									"value": "exercitation cupidatat est Excepteur non",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/admin/deregister-device/:device_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"deregister-device",
+										":device_id"
+									],
+									"variable": [
+										{
+											"key": "device_id",
+											"value": "exercitation cupidatat est Excepteur non",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/admin/deregister-device/:device_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"deregister-device",
+										":device_id"
+									],
+									"variable": [
+										{
+											"key": "device_id",
+											"value": "exercitation cupidatat est Excepteur non",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"nulla dolore nostrud non\",\n        \"id magna\"\n      ],\n      \"msg\": \"ipsum veli\",\n      \"type\": \"proident ullamco Duis sunt\"\n    },\n    {\n      \"loc\": [\n        \"laborum proident\",\n        \"ullamco veniam enim\"\n      ],\n      \"msg\": \"eu ullamco velit officia\",\n      \"type\": \"qui ma\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List Inactive Devices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{bearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/list-inactive-devices",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"list-inactive-devices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer <token>",
+										"description": "Added as a part of security scheme: bearer"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/admin/list-inactive-devices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"admin",
+										"list-inactive-devices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"device_id\": \"cupidatat id tempor velit\",\n    \"category\": \"elit commodo ame\",\n    \"username\": \"Lorem nul\",\n    \"user_uid\": \"volu\",\n    \"status\": \"ex nisi ea reprehenderit\"\n  },\n  {\n    \"device_id\": \"sunt mollit minim cillum\",\n    \"category\": \"velit consectetur anim qui\",\n    \"username\": \"culpa occaeca\",\n    \"user_uid\": \"fugiat magna id occaecat commodo\",\n    \"status\": \"ea mollit\"\n  }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Read Root",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successful Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}
