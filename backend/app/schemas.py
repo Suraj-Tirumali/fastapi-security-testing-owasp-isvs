@@ -94,9 +94,9 @@ class CategoryOut(BaseModel):
         from_attributes = True
 
 # -----------------------------
-# Input model for device registration by admin
+# Input model for resource registration by manager
 # -----------------------------
-class DeviceCreate(BaseModel):
+class ResourceCreate(BaseModel):
     email: EmailStr
     category: str
 
@@ -107,37 +107,37 @@ class DeviceCreate(BaseModel):
 
 
 # -----------------------------
-# Output model for device registration
+# Output model for resource registration
 # -----------------------------
-class DeviceResponse(BaseModel):
-    device_id: str
+class ResourceResponse(BaseModel):
+    resource_id: str
     category: str
     user_uid: str
     username: str
     status: str
 # -----------------------------
-# device login request
+# resource login request
 # -----------------------------
-class DeviceLoginRequest(BaseModel):
-    device_id: str
+class ResourceLoginRequest(BaseModel):
+    resource_id: str
 
 
-class DeviceLoginResponse(BaseModel):
+class ResourceLoginResponse(BaseModel):
     message: str
 # -----------------------------
-# Minimal device info
+# Minimal resource info
 # -----------------------------
-class DeviceInfo(BaseModel):
-    device_id: str
+class ResourceInfo(BaseModel):
+    resource_id: str
     category: str
 
 # -----------------------------
-# Grouped count of devices by user
+# Grouped count of resources by user
 # -----------------------------
-class UserDeviceList(BaseModel):
+class UserResourceList(BaseModel):
     category: str
-    device_count: int
-    devices: dict[str, int]
+    resource_count: int
+    resources: dict[str, int]
 
     class Config:
         from_attributes = True
@@ -150,28 +150,28 @@ class GroupedUserList(BaseModel):
     inactive_users: List[UserOut]
 
 # -----------------------------
-# Output model: grouped user devices per category
+# Output model: grouped user resources per category
 # -----------------------------
-class GroupedUserDevice(BaseModel):
+class GroupedUserResource(BaseModel):
     category: str
-    device_count: int
-    devices: Dict[str, int]  # username -> count
+    resource_count: int
+    resources: Dict[str, int]  # username -> count
 
 # -----------------------------
-# Combined output for active/inactive grouped devices
+# Combined output for active/inactive grouped resources
 # -----------------------------
-class GroupedDeviceSummary(BaseModel):
-    active_devices: List[GroupedUserDevice]
-    inactive_devices: List[GroupedUserDevice]
+class GroupedResourceSummary(BaseModel):
+    active_resources: List[GroupedUserResource]
+    inactive_resources: List[GroupedUserResource]
 
     class Config:
         from_attributes = True
 
 # -----------------------------
-# Device model used in listing
+# Resource model used in listing
 # -----------------------------
-class DeviceOut(BaseModel):
-    device_id: str
+class ResourceOut(BaseModel):
+    resource_id: str
     category: str
     user_uid: str
     username: str
@@ -181,27 +181,27 @@ class DeviceOut(BaseModel):
         from_attributes = True
 
 # -----------------------------
-# Simplified summary for a device
+# Simplified summary for a resource
 # -----------------------------
-class DeviceSummary(BaseModel):
-    device_id: str
+class ResourceSummary(BaseModel):
+    resource_id: str
     category: str
     status: str
 
 # -----------------------------
-# User + their devices model
+# User + their resources model
 # -----------------------------
-class UserWithDevicesOut(BaseModel):
+class UserWithResourcesOut(BaseModel):
     user_uid: str
     username: str
     email: str
     phone: str
-    devices: list[DeviceSummary] = []
+    resources: list[ResourceSummary] = []
 
 # -----------------------------
-# Admin password change request schema
+# Manager password change request schema
 # -----------------------------
-class AdminPasswordChange(BaseModel):
+class ManagerPasswordChange(BaseModel):
     email: str
     new_password: str
     confirm_password: str
@@ -213,10 +213,10 @@ class AdminPasswordChange(BaseModel):
         return self
         
 # -----------------------------
-# Minimal device output for inactive state (no user info)
+# Minimal resource output for inactive state (no user info)
 # -----------------------------
-class InactiveDeviceOut1(BaseModel):
-    device_id: str
+class InactiveResourceOut1(BaseModel):
+    resource_id: str
     category: str
     status: str
 
@@ -224,10 +224,10 @@ class InactiveDeviceOut1(BaseModel):
         from_attributes = True
 
 # -----------------------------
-# Inactive device with ownership context
+# Inactive resource with ownership context
 # -----------------------------
-class InactiveDeviceOut(BaseModel):
-    device_id: str
+class InactiveResourceOut(BaseModel):
+    resource_id: str
     category: str
     username: str
     user_uid: str
@@ -237,18 +237,18 @@ class InactiveDeviceOut(BaseModel):
         from_attributes = True
 
 # -----------------------------
-# Input model for re-registration of pre-owned device
+# Input model for re-registration of pre-owned resource
 # -----------------------------
-class PreOwnedDeviceRequest(BaseModel):
-    device_id: str
+class PreOwnedResourceRequest(BaseModel):
+    resource_id: str
     category: str
     username: str
 
 # -----------------------------
-# Output model after claiming a pre-owned device
+# Output model after claiming a pre-owned resource
 # -----------------------------
-class PreOwnedDeviceResponse(BaseModel):
-    device_id: str
+class PreOwnedResourceResponse(BaseModel):
+    resource_id: str
     category: str
     username: str
     user_uid: str
@@ -260,8 +260,8 @@ class PreOwnedDeviceResponse(BaseModel):
 # -----------------------------
 # Ownership history output schema
 # -----------------------------
-class DeviceOwnershipOut(BaseModel):
-    device_id: str
+class ResourceOwnershipOut(BaseModel):
+    resource_id: str
     category: str
     previous_owners: List[str]
     current_owner: str
