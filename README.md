@@ -4,6 +4,7 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
 ![Security Testing](https://img.shields.io/badge/Security-Testing-red)
 ![OWASP ISVS](https://img.shields.io/badge/OWASP-ISVS-orange)
+![GitHub Repo stars](https://img.shields.io/github/stars/Suraj-Tirumali/iot-api-security-testing-isvs?style=social)
 
 FastAPI based backend API with automated security testing aligned with the **OWASP IoT Security Verification Standard (ISVS)**.
 
