@@ -49,7 +49,7 @@ iot-api-security-testing-isvs
 │
 ├── backend
 │   ├── app
-│   │   ├── admin.py
+│   │   ├── manager.py
 │   │   ├── database.py
 │   │   ├── resource.py
 │   │   ├── limiter_config.py
@@ -66,7 +66,7 @@ iot-api-security-testing-isvs
 ├── security_tests
 │   ├── authorization_test.py
 │   ├── password_policy_test.py
-│   ├── admin_password_change_test.py
+│   ├── manager_password_change_test.py
 │   ├── resource_identity_test.py
 │   └── isvs_security_tests.py
 │
@@ -96,7 +96,7 @@ The backend provides core functionality required for managing users and IoT reso
 |------|-------------|
 | `/user` | User authentication and password management |
 | `/resource` | Resource registration and ownership validation |
-| `/admin` | Administrative resource and user management |
+| `/manager` | Administrative resource and user management |
 
 FastAPI automatically generates interactive API documentation (Swagger UI) available at:
 
