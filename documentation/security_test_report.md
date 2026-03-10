@@ -1,7 +1,6 @@
 # Security Test Report
 
 Author: **Suraj Tirumali**  
-Date: August 2025  
 Project: **IoT Resource Management API Security Assessment**  
 
 ---
