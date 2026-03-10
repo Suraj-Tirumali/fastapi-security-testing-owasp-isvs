@@ -1,10 +1,10 @@
-# Secure Resource Management API – FastAPI Security Testing using OWASP ISVS
+# IoT API Security Testing using FastAPI and OWASP ISVS
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
 ![Security Testing](https://img.shields.io/badge/Security-Testing-red)
 ![OWASP ISVS](https://img.shields.io/badge/OWASP-ISVS-orange)
-![GitHub Repo stars](https://img.shields.io/github/stars/Suraj-Tirumali/fastapi-security-testing-owasp-isvs?style=social)
+![GitHub Repo stars](https://img.shields.io/github/stars/Suraj-Tirumali/iot-api-security-testing-isvs?style=social)
 
 FastAPI based backend API with automated security testing aligned with the **OWASP IoT Security Verification Standard (ISVS)**.
 
@@ -15,6 +15,8 @@ This project demonstrates authentication validation, authorization enforcement, 
 This repository demonstrates the development and security testing of a backend API designed for managing users and IoT resources. The backend is built using **FastAPI** and **PostgreSQL**, and security testing was conducted based on the **OWASP IoT Security Verification Standard (ISVS)**.
 
 The project focuses on validating authentication mechanisms, authorization controls, password management policies, and resource identity management within an IoT ecosystem.
+
+In this project, **resources represent IoT devices or connected assets** within a simulated IoT backend environment. The term "resource" is used as a generalized abstraction to keep the implementation reusable while still modeling common IoT device management scenarios.
 
 This repository contains:
 
